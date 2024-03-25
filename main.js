@@ -67,34 +67,57 @@ function mePuedoMover(y, x) {
 
 // Comprobar si la siguiente celda es una caja
 
-function esUnaCaja (y, x) {
-    if (tablero[y][x] === "C" ){
-      return true;
-    } else {
-      return false;
-    }
+function esUnaCaja(y, x) {
+  if (tablero[y][x] === "C") {
+    return true;
+  } else {
+    return false;
   }
-  
- // Empujar caja
+}
 
- function empujar(ycaja,xcaja) {
-    let coordenadasJugador = dondeEstaJugador();
-  
-    let YinicialDeJugador = coordenadasJugador[0];
-    let XinicialDeJugador = coordenadasJugador[1];
-  
-    let nuevaYdeJugador = YinicialDeJugador;
-    let nuevaXdeJugador = XinicialDeJugador;
-  
-    let YinicialDeCaja = ycaja;
-    let XinicialDeCaja = xcaja;
-  
-    let nuevaYdeCaja= YinicialDeCaja
-    let nuevaXdeCaja = XinicialDeCaja;
+// Empujar caja
+
+function empujar(Ycaja, Xcaja, direccion) {
+  let coordenadasJugador = dondeEstaJugador();
+
+  let YinicialDeJugador = coordenadasJugador[0];
+  let XinicialDeJugador = coordenadasJugador[1];
+
+  let nuevaYdeJugador = YinicialDeJugador;
+  let nuevaXdeJugador = XinicialDeJugador;
+
+  let YinicialDeCaja = Ycaja;
+  let XinicialDeCaja = Xcaja;
+
+  let nuevaYdeCaja = YinicialDeCaja;
+  let nuevaXdeCaja = XinicialDeCaja;
+
+  switch (direccion) {
+    case "arriba":
+      let arribaDeCaja = YinicialDeCaja - 1;
+      if (mePuedoMover(arribaDeCaja, XinicialDeCaja)) {
+        nuevaYdeCaja--;
+        nuevaYdeJugador--;
+      } else {
+        return null;
+      }
+      break;
+    case "abajo":
+      break;
+    case "izquierda":
+      break;
+    case "derecha":
+      break;
   }
-  
 
-  // Mover el jugador
+  tablero[nuevaYdeJugador][nuevaXdeJugador] = "J";
+  tablero[nuevaYdeCaja][nuevaXdeCaja] = "C";
+  tablero[YinicialDeJugador][XinicialDeJugador] = "-";
+
+  refrescarTablero(tablero);
+}
+
+// Mover el jugador
 
 function mover(e) {
   let tecla = e.key;
@@ -106,24 +129,23 @@ function mover(e) {
   let nuevaYdeJugador = YinicialDeJugador;
   let nuevaXdeJugador = XinicialDeJugador;
 
-
- 
   // Mover el jugador segun la tecla y evitando obstaculos
 
   switch (tecla) {
     case "ArrowUp":
-      let yAbajo = YinicialDeJugador - 1;
-      if (mePuedoMover(yAbajo, XinicialDeJugador)) {
+      let yArriba = YinicialDeJugador - 1;
+
+      if (mePuedoMover(yArriba, XinicialDeJugador)) {
         nuevaYdeJugador--;
-      } else if (esUnaCaja(yAbajo, XinicialDeJugador)){
-      nuevaYdeJugador--;
-      } else { 
+      } else if (esUnaCaja(yArriba, XinicialDeJugador)) {
+        return empujar(yArriba, XinicialDeJugador, "arriba");
+      } else {
         return null;
       }
       break;
     case "ArrowDown":
-      let yArriba = YinicialDeJugador + 1;
-      if (mePuedoMover(yArriba, XinicialDeJugador)) {
+      let yAbajo = YinicialDeJugador + 1;
+      if (mePuedoMover(yAbajo, XinicialDeJugador)) {
         nuevaYdeJugador++;
       } else {
         return null;
