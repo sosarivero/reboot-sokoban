@@ -1,6 +1,6 @@
 // construir el tablero
 
-let nivel = "#####|#@$.#|#####"
+let nivel = "#######|#-----#|#-JC.-#|#-----#|#######"
 let linea = nivel.split("|")
 let tablero = []
 for(let i=0; i < linea.length; i++) {

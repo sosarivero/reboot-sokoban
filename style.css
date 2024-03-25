@@ -1,0 +1,13 @@
+.tablero {
+    display: flex;
+    flex-direction: column;
+}
+
+.linea {
+    display: flex;
+}
+
+.celda {
+    font-family: monospace;
+    font-size: 96px;
+}
