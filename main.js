@@ -3,10 +3,10 @@
 let nivel = "#######|#-----#|#-JC.-#|#-----#|#######";
 let linea = nivel.split("|");
 let tablero = [];
+
 for (let i = 0; i < linea.length; i++) {
   tablero.push(linea[[i]].split(""));
 }
-console.log(tablero);
 
 function imprimirTablero(tablero) {
   // Crea un div que representa el tablero entero
@@ -19,8 +19,6 @@ function imprimirTablero(tablero) {
     lineaDiv.classList.add("linea");
     // Bucle para crear divs para cada celda de cada línea
     for (let celda = 0; celda < tablero[linea].length; celda++) {
-    
-
       let celdaDiv = document.createElement("div");
       celdaDiv.innerText = tablero[linea][celda];
       celdaDiv.classList.add("celda");
@@ -36,19 +34,18 @@ function imprimirTablero(tablero) {
 
 imprimirTablero(tablero);
 
-// Encontrar el jugador 
+// Encontrar el jugador
 
-function dondeEstaJugador () {
-    for (let y = 0; y < tablero.length; y++) {
-        for (let x = 0; x < tablero[y].length; x++) {
-            if (tablero[y][x]==="J") {
-                return [y,x]
-            }
-        }
+function dondeEstaJugador() {
+  for (let y = 0; y < tablero.length; y++) {
+    for (let x = 0; x < tablero[y].length; x++) {
+      if (tablero[y][x] === "J") {
+        return [y, x];
+      }
     }
+  }
 }
-window.addEventListener("keydown", function(e){
-console.log(e)
-})
+window.addEventListener("keydown", function (e) {
 
-console.log(dondeEstaJugador())
+});
+
