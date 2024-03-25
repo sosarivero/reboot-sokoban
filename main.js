@@ -11,7 +11,7 @@ for (let i = 0; i < linea.length; i++) {
 function imprimirTablero(tablero) {
   // Crea un div que representa el tablero entero
   let tableroDiv = document.createElement("div");
-  tableroDiv.classList.add("tablero");
+  tableroDiv.id = "tablero";
 
   // Bucle para crear un div para cada línea del tablero
   for (let linea = 0; linea < tablero.length; linea++) {
@@ -32,7 +32,16 @@ function imprimirTablero(tablero) {
   document.body.appendChild(tableroDiv);
 }
 
+function borrarTablero() {
+    let tableroDiv = document.getElementById("tablero");
+    document.body.removeChild(tableroDiv);
+}
 imprimirTablero(tablero);
+
+function refrescarTablero(tablero) {
+    borrarTablero();
+    imprimirTablero(tablero);
+}
 
 // Encontrar el jugador
 
@@ -45,7 +54,31 @@ function dondeEstaJugador() {
     }
   }
 }
-window.addEventListener("keydown", function (e) {
 
+function mover(e) {
+    let tecla = e.key;
+    let coordenadasJugador = dondeEstaJugador();
+
+    let YinicialDeJugador = coordenadasJugador[0];
+    let XinicialDeJugador = coordenadasJugador[1];
+
+    let nuevaYdeJugador = YinicialDeJugador;
+    let nuevaXdeJugador = XinicialDeJugador;
+
+
+    switch (tecla) {
+        case "ArrowUp":
+            nuevaYdeJugador--;
+            break;
+    }
+
+    tablero[nuevaYdeJugador][nuevaXdeJugador] = "J";
+    imprimirTablero(tablero);
+}
+
+
+window.addEventListener("keydown", function (e) {
+    mover(e);
+    console.log(e.key);
 });
 
