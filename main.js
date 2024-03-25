@@ -103,10 +103,31 @@ function empujar(Ycaja, Xcaja, direccion) {
       }
       break;
     case "abajo":
+        let abajoDeCaja = YinicialDeCaja + 1;
+        if (mePuedoMover(abajoDeCaja, XinicialDeCaja)) {
+          nuevaYdeCaja++;
+          nuevaYdeJugador++;
+        } else {
+          return null;
+        }
       break;
     case "izquierda":
+        let izquierdaDeCaja = XinicialDeCaja - 1;
+        if (mePuedoMover(YinicialDeCaja, izquierdaDeCaja)) {
+          nuevaXdeCaja--;
+          nuevaXdeJugador--;
+        } else {
+          return null;
+        }
       break;
     case "derecha":
+        let derechaDeCaja = XinicialDeCaja + 1;
+        if (mePuedoMover(YinicialDeCaja, derechaDeCaja)) {
+          nuevaXdeCaja++;
+          nuevaXdeJugador++;
+        } else {
+          return null;
+        }
       break;
   }
 
@@ -147,6 +168,8 @@ function mover(e) {
       let yAbajo = YinicialDeJugador + 1;
       if (mePuedoMover(yAbajo, XinicialDeJugador)) {
         nuevaYdeJugador++;
+    } else if (esUnaCaja(yAbajo, XinicialDeJugador)) {
+        return empujar(yAbajo, XinicialDeJugador, "abajo");
       } else {
         return null;
       }
@@ -155,6 +178,8 @@ function mover(e) {
       let xIzquierda = XinicialDeJugador - 1;
       if (mePuedoMover(YinicialDeJugador, xIzquierda)) {
         nuevaXdeJugador--;
+    } else if (esUnaCaja(YinicialDeJugador, xIzquierda)) {
+        return empujar(YinicialDeJugador, xIzquierda, "izquierda");
       } else {
         return null;
       }
@@ -163,6 +188,8 @@ function mover(e) {
       let xDerecha = XinicialDeJugador + 1;
       if (mePuedoMover(YinicialDeJugador, xDerecha)) {
         nuevaXdeJugador++;
+    } else if (esUnaCaja(YinicialDeJugador, xDerecha)) {
+        return empujar(YinicialDeJugador, xDerecha, "derecha");
       } else {
         return null;
       }
