@@ -65,8 +65,36 @@ function mePuedoMover(y, x) {
   }
 }
 
+// Comprobar si la siguiente celda es una caja
 
-// Mover el jugador
+function esUnaCaja (y, x) {
+    if (tablero[y][x] === "C" ){
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
+ // Empujar caja
+
+ function empujar(ycaja,xcaja) {
+    let coordenadasJugador = dondeEstaJugador();
+  
+    let YinicialDeJugador = coordenadasJugador[0];
+    let XinicialDeJugador = coordenadasJugador[1];
+  
+    let nuevaYdeJugador = YinicialDeJugador;
+    let nuevaXdeJugador = XinicialDeJugador;
+  
+    let YinicialDeCaja = ycaja;
+    let XinicialDeCaja = xcaja;
+  
+    let nuevaYdeCaja= YinicialDeCaja
+    let nuevaXdeCaja = XinicialDeCaja;
+  }
+  
+
+  // Mover el jugador
 
 function mover(e) {
   let tecla = e.key;
@@ -78,36 +106,40 @@ function mover(e) {
   let nuevaYdeJugador = YinicialDeJugador;
   let nuevaXdeJugador = XinicialDeJugador;
 
+
+ 
   // Mover el jugador segun la tecla y evitando obstaculos
 
   switch (tecla) {
     case "ArrowUp":
-      let y = YinicialDeJugador - 1;
-      if (mePuedoMover(y, XinicialDeJugador)) {
+      let yAbajo = YinicialDeJugador - 1;
+      if (mePuedoMover(yAbajo, XinicialDeJugador)) {
         nuevaYdeJugador--;
-      } else {
+      } else if (esUnaCaja(yAbajo, XinicialDeJugador)){
+      nuevaYdeJugador--;
+      } else { 
         return null;
       }
       break;
     case "ArrowDown":
-      let z = YinicialDeJugador + 1;
-      if (mePuedoMover(z, XinicialDeJugador)) {
+      let yArriba = YinicialDeJugador + 1;
+      if (mePuedoMover(yArriba, XinicialDeJugador)) {
         nuevaYdeJugador++;
       } else {
         return null;
       }
       break;
     case "ArrowLeft":
-      let x = XinicialDeJugador - 1;
-      if (mePuedoMover(YinicialDeJugador, x)) {
+      let xIzquierda = XinicialDeJugador - 1;
+      if (mePuedoMover(YinicialDeJugador, xIzquierda)) {
         nuevaXdeJugador--;
       } else {
         return null;
       }
       break;
     case "ArrowRight":
-      let w = XinicialDeJugador + 1;
-      if (mePuedoMover(YinicialDeJugador, w)) {
+      let xDerecha = XinicialDeJugador + 1;
+      if (mePuedoMover(YinicialDeJugador, xDerecha)) {
         nuevaXdeJugador++;
       } else {
         return null;
