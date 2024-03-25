@@ -33,14 +33,14 @@ function imprimirTablero(tablero) {
 }
 
 function borrarTablero() {
-    let tableroDiv = document.getElementById("tablero");
-    document.body.removeChild(tableroDiv);
+  let tableroDiv = document.getElementById("tablero");
+  document.body.removeChild(tableroDiv);
 }
 imprimirTablero(tablero);
 
 function refrescarTablero(tablero) {
-    borrarTablero();
-    imprimirTablero(tablero);
+  borrarTablero();
+  imprimirTablero(tablero);
 }
 
 // Encontrar el jugador
@@ -55,30 +55,72 @@ function dondeEstaJugador() {
   }
 }
 
-function mover(e) {
-    let tecla = e.key;
-    let coordenadasJugador = dondeEstaJugador();
+// Comprobar si se puede mover el jugador
 
-    let YinicialDeJugador = coordenadasJugador[0];
-    let XinicialDeJugador = coordenadasJugador[1];
-
-    let nuevaYdeJugador = YinicialDeJugador;
-    let nuevaXdeJugador = XinicialDeJugador;
-
-
-    switch (tecla) {
-        case "ArrowUp":
-            nuevaYdeJugador--;
-            break;
-    }
-
-    tablero[nuevaYdeJugador][nuevaXdeJugador] = "J";
-    imprimirTablero(tablero);
+function mePuedoMover(y, x) {
+  if (tablero[y][x] === "C" || tablero[y][x] === "#") {
+    return false;
+  } else {
+    return true;
+  }
 }
 
 
-window.addEventListener("keydown", function (e) {
-    mover(e);
-    console.log(e.key);
-});
+// Mover el jugador
 
+function mover(e) {
+  let tecla = e.key;
+  let coordenadasJugador = dondeEstaJugador();
+
+  let YinicialDeJugador = coordenadasJugador[0];
+  let XinicialDeJugador = coordenadasJugador[1];
+
+  let nuevaYdeJugador = YinicialDeJugador;
+  let nuevaXdeJugador = XinicialDeJugador;
+
+  // Mover el jugador segun la tecla y evitando obstaculos
+
+  switch (tecla) {
+    case "ArrowUp":
+      let y = YinicialDeJugador - 1;
+      if (mePuedoMover(y, XinicialDeJugador)) {
+        nuevaYdeJugador--;
+      } else {
+        return null;
+      }
+      break;
+    case "ArrowDown":
+      let z = YinicialDeJugador + 1;
+      if (mePuedoMover(z, XinicialDeJugador)) {
+        nuevaYdeJugador++;
+      } else {
+        return null;
+      }
+      break;
+    case "ArrowLeft":
+      let x = XinicialDeJugador - 1;
+      if (mePuedoMover(YinicialDeJugador, x)) {
+        nuevaXdeJugador--;
+      } else {
+        return null;
+      }
+      break;
+    case "ArrowRight":
+      let w = XinicialDeJugador + 1;
+      if (mePuedoMover(YinicialDeJugador, w)) {
+        nuevaXdeJugador++;
+      } else {
+        return null;
+      }
+      break;
+  }
+
+  tablero[nuevaYdeJugador][nuevaXdeJugador] = "J";
+  tablero[YinicialDeJugador][XinicialDeJugador] = "-";
+  refrescarTablero(tablero);
+}
+
+window.addEventListener("keydown", function (e) {
+  mover(e);
+  console.log(e.key);
+});
