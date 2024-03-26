@@ -84,6 +84,19 @@ function esUnaMeta(celda) {
   }
 }
 
+// Comprueba si ganado el juego  
+function hasGanado(tablero) {
+ for (let i=0; i<tablero.length; i++){
+  for(let j=0; j<tablero[i].length;j++) {
+if(tablero[i][j]===".") {
+  return false
+}
+  }
+ }
+ return "Parabens! Passas-te ao proximo nivel!"
+}
+
+
 // Empujar caja
 
 function empujar(Ycaja, Xcaja, direccion) {
