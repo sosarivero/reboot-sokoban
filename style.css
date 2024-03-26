@@ -1,6 +1,7 @@
-.tablero {
+#tablero {
     display: flex;
     flex-direction: column;
+    visibility: hidden;
 }
 
 .linea {
@@ -38,3 +39,9 @@
 .meta {
     background-image: url("./images/Goal.gif")
 }
+
+#empezar {
+    display: block;
+    background-color: rgb(255, 115, 0);
+}
+
