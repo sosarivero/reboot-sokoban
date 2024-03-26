@@ -64,7 +64,7 @@ function imprimirTablero(tablero) {
     tableroDiv.appendChild(lineaDiv);
   }
   // Añade el tablero al body de HTML, para por fin hacer visible todos los elementos creados
-  document.body.appendChild(tableroDiv);    console.log(comprobarVictoria(tablero))
+  document.body.appendChild(tableroDiv); 
 
 }
 
@@ -72,11 +72,11 @@ function borrarTablero() {
   let tableroDiv = document.getElementById("tablero");
   document.body.removeChild(tableroDiv);
 }
-imprimirTablero(tablero);
 
 function refrescarTablero(tablero) {
   borrarTablero();
   imprimirTablero(tablero);
+  
   if (comprobarVictoria(tablero)) {
     window.alert("Parabens, ganhaste e passas ao proximo nivel!")
   };

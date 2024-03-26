@@ -12,11 +12,12 @@
 #tablero {
     display: flex;
     flex-direction: column;
-    visibility: hidden;
+    align-items: center;
 }
 
 .linea {
     display: flex;
+    justify-content: center;
 }
 
 .celda {
