@@ -68,7 +68,7 @@ function mePuedoMover(y, x) {
 // Comprobar si la siguiente celda es una caja
 
 function esUnaCaja(y, x) {
-  if (tablero[y][x] === "C") {
+  if (tablero[y][x] === "C" || tablero[y][x] === "*")  {
     return true;
   } else {
     return false;
@@ -140,13 +140,25 @@ function empujar(Ycaja, Xcaja, direccion) {
       }
       break;
   }
+
   if (esUnaMeta(tablero[nuevaYdeJugador][nuevaXdeJugador])) {
     tablero[nuevaYdeJugador][nuevaXdeJugador] = "+";
   } else {
     tablero[nuevaYdeJugador][nuevaXdeJugador] = "J";
   }
-  tablero[nuevaYdeCaja][nuevaXdeCaja] = "C";
-  tablero[YinicialDeJugador][XinicialDeJugador] = "-";
+
+  if (esUnaMeta(tablero[YinicialDeJugador][XinicialDeJugador])) {
+    tablero[YinicialDeJugador][XinicialDeJugador] = ".";
+  } else {
+    tablero[YinicialDeJugador][XinicialDeJugador] = "-";
+  }
+
+  if(esUnaMeta(tablero[nuevaYdeCaja][nuevaXdeCaja])) {
+    tablero[nuevaYdeCaja][nuevaXdeCaja] = "*";
+  } else {
+    console.log("madalena")
+    tablero[nuevaYdeCaja][nuevaXdeCaja] = "C";
+  }
 
   refrescarTablero(tablero);
 }
