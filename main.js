@@ -10,12 +10,16 @@ let nivel = `
 #######
 `;
 
-let linea = nivel.split("\n");
-let tablero = [];
-
-for (let i = 0; i < linea.length; i++) {
-  tablero.push(linea[[i]].split(""));
+function stringDeNivelATablero(string) {
+  let linea = string.split("\n");
+  let tablero = [];
+  for (let i = 0; i < linea.length; i++) {
+    tablero.push(linea[[i]].split(""));
+  }
+  return tablero;
 }
+
+let tablero = stringDeNivelATablero(nivel);
 
 function imprimirTablero(tablero) {
   // Crea un div que representa el tablero entero
