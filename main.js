@@ -1,6 +1,6 @@
 // construir el tablero
 
-let nivel = "#######|#-----#|#-JC.-#|#-----#|#######";
+let nivel = "#######|#     #|# @$. #|#     #|#######";
 let linea = nivel.split("|");
 let tablero = [];
 
@@ -29,19 +29,19 @@ function imprimirTablero(tablero) {
         case "#":
           celdaDiv.classList.add("pared");
           break;
-        case "J":
+        case "@":
           celdaDiv.classList.add("jugador");
           break;
         case "+":
           celdaDiv.classList.add("jugador-en-meta");
           break;
-        case "C":
+        case "$":
           celdaDiv.classList.add("caja");
           break;
         case "*":
           celdaDiv.classList.add("caja-en-meta");
           break;
-        case "-":
+        case " ":
           celdaDiv.classList.add("suelo");
           break;
         case ".":
@@ -55,7 +55,8 @@ function imprimirTablero(tablero) {
     tableroDiv.appendChild(lineaDiv);
   }
   // Añade el tablero al body de HTML, para por fin hacer visible todos los elementos creados
-  document.body.appendChild(tableroDiv);
+  document.body.appendChild(tableroDiv);    console.log(comprobarVictoria(tablero))
+
 }
 
 function borrarTablero() {
@@ -77,7 +78,7 @@ function refrescarTablero(tablero) {
 function dondeEstaJugador() {
   for (let y = 0; y < tablero.length; y++) {
     for (let x = 0; x < tablero[y].length; x++) {
-      if (tablero[y][x] === "J" || tablero[y][x] === "+") {
+      if (tablero[y][x] === "@" || tablero[y][x] === "+") {
         return [y, x];
       }
     }
@@ -87,7 +88,7 @@ function dondeEstaJugador() {
 // Comprobar si se puede mover el jugador
 
 function mePuedoMover(y, x) {
-  if (tablero[y][x] === "C" || tablero[y][x] === "#" || tablero[y][x] === "*") {
+  if (tablero[y][x] === "$" || tablero[y][x] === "#" || tablero[y][x] === "*") {
     return false;
   } else {
     return true;
@@ -97,7 +98,7 @@ function mePuedoMover(y, x) {
 // Comprobar si la siguiente celda es una caja
 
 function esUnaCaja(y, x) {
-  if (tablero[y][x] === "C" || tablero[y][x] === "*") {
+  if (tablero[y][x] === "$" || tablero[y][x] === "*") {
     return true;
   } else {
     return false;
@@ -185,19 +186,19 @@ function empujar(Ycaja, Xcaja, direccion) {
   if (esUnaMeta(tablero[nuevaYdeJugador][nuevaXdeJugador])) {
     tablero[nuevaYdeJugador][nuevaXdeJugador] = "+";
   } else {
-    tablero[nuevaYdeJugador][nuevaXdeJugador] = "J";
+    tablero[nuevaYdeJugador][nuevaXdeJugador] = "@";
   }
 
   if (esUnaMeta(tablero[YinicialDeJugador][XinicialDeJugador])) {
     tablero[YinicialDeJugador][XinicialDeJugador] = ".";
   } else {
-    tablero[YinicialDeJugador][XinicialDeJugador] = "-";
+    tablero[YinicialDeJugador][XinicialDeJugador] = " ";
   }
 
   if (esUnaMeta(tablero[nuevaYdeCaja][nuevaXdeCaja])) {
     tablero[nuevaYdeCaja][nuevaXdeCaja] = "*";
   } else {
-    tablero[nuevaYdeCaja][nuevaXdeCaja] = "C";
+    tablero[nuevaYdeCaja][nuevaXdeCaja] = "$";
   }
 
   refrescarTablero(tablero);
@@ -264,13 +265,13 @@ function mover(e) {
   if (esUnaMeta(tablero[nuevaYdeJugador][nuevaXdeJugador])) {
     tablero[nuevaYdeJugador][nuevaXdeJugador] = "+";
   } else {
-    tablero[nuevaYdeJugador][nuevaXdeJugador] = "J";
+    tablero[nuevaYdeJugador][nuevaXdeJugador] = "@";
   }
 
   if (esUnaMeta(tablero[YinicialDeJugador][XinicialDeJugador])) {
     tablero[YinicialDeJugador][XinicialDeJugador] = ".";
   } else {
-    tablero[YinicialDeJugador][XinicialDeJugador] = "-";
+    tablero[YinicialDeJugador][XinicialDeJugador] = " ";
   }
   refrescarTablero(tablero);
 }
