@@ -1,14 +1,4 @@
-// construir el tablero
-
-let nivel = `
-#######
-###.###
-###$###
-#.$@$.#
-###$###
-###.###
-#######
-`;
+let nivel_actual = 0;
 
 function stringDeNivelATablero(string) {
   let linea = string.split("\n");
@@ -19,7 +9,7 @@ function stringDeNivelATablero(string) {
   return tablero;
 }
 
-let tablero = stringDeNivelATablero(nivel);
+let tablero = stringDeNivelATablero(NIVELES[nivel_actual]);
 
 function imprimirTablero(tablero) {
   // Crea un div que representa el tablero entero
@@ -76,17 +66,23 @@ function borrarTablero() {
   document.body.removeChild(tableroDiv);
 }
 
-function refrescarTablero(tablero) {
+function refrescarTablero() {
   borrarTablero();
-  imprimirTablero(tablero);
-
+  
   if (comprobarVictoria(tablero)) {
-    window.alert("Parabens, ganhaste e passas ao proximo nivel!");
+    // window.alert("Parabens, ganhaste e passas ao proximo nivel!");
+    setTimeout(cambiarNivel, 1500);
   }
+  imprimirTablero(tablero);
+}
+
+function cambiarNivel() {
+  nivel_actual++;
+  tablero = stringDeNivelATablero(NIVELES[nivel_actual]);
+  refrescarTablero(tablero)
 }
 
 // Encontrar el jugador
-
 function dondeEstaJugador() {
   for (let y = 0; y < tablero.length; y++) {
     for (let x = 0; x < tablero[y].length; x++) {
@@ -98,7 +94,6 @@ function dondeEstaJugador() {
 }
 
 // Comprobar si se puede mover el jugador
-
 function mePuedoMover(y, x) {
   if (tablero[y][x] === "$" || tablero[y][x] === "#" || tablero[y][x] === "*") {
     return false;
@@ -108,7 +103,6 @@ function mePuedoMover(y, x) {
 }
 
 // Comprobar si la siguiente celda es una caja
-
 function esUnaCaja(y, x) {
   if (tablero[y][x] === "$" || tablero[y][x] === "*") {
     return true;
@@ -127,7 +121,7 @@ function esUnaMeta(celda) {
 }
 
 //Comprueba si eres ganador
-function comprobarVictoria(tablero) {
+function comprobarVictoria() {
   for (let i = 0; i < tablero.length; i++) {
     for (let j = 0; j < tablero[i].length; j++) {
       if (tablero[i][j] === "." || tablero[i][j] === "+") {
@@ -139,7 +133,6 @@ function comprobarVictoria(tablero) {
 }
 
 // Empujar caja
-
 function empujar(Ycaja, Xcaja, direccion) {
   esUnaMeta;
   let coordenadasJugador = dondeEstaJugador();
@@ -217,7 +210,6 @@ function empujar(Ycaja, Xcaja, direccion) {
 }
 
 // Mover el jugador
-
 function mover(e) {
   let tecla = e.key;
   let coordenadasJugador = dondeEstaJugador();
@@ -288,10 +280,21 @@ function mover(e) {
   refrescarTablero(tablero);
 }
 
+
+// Añadir los eventListeners a la ventana y elementos del DOM.
 const teclasValidas = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
 
 window.addEventListener("keydown", function (e) {
   if (teclasValidas.includes(e.key)) {
     mover(e);
   }
+});
+
+let boton = document.getElementById("empezar");
+let tableroHTML = document.getElementById("tablero");
+let inicio = document.getElementById("inicio");
+
+boton.addEventListener("click", function () {
+  imprimirTablero(tablero);
+  document.body.removeChild(inicio);
 });
