@@ -1,83 +1,80 @@
-*{
-    margin: 0;
-    padding: 0;
-    font-family:"Pixelify Sans";
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Pixelify Sans";
 }
 #inicio {
-    background-color: black;
-    color: white;
-    height: 100vh;
+  background-color: black;
+  color: white;
+  height: 100vh;
 }
 
 #tablero {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .linea {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .celda {
-    font-family: monospace;
-    font-size: 0px;
-    min-width: 128px;
-    min-height: 128px;
+  font-family: monospace;
+  font-size: 0px;
+  min-width: 128px;
+  min-height: 128px;
 }
 
-.jugador, .jugador-en-meta {
-    background-image: url("./images/Player.gif");
+.jugador,
+.jugador-en-meta {
+  background-image: url("./images/Player.gif");
 }
 
 .caja {
-    background-image: url("./images/Box.gif")
+  background-image: url("./images/Box.gif");
 }
 
 .caja-en-meta {
-    background-image: url("./images/BoxOnGoal.gif");
+  background-image: url("./images/BoxOnGoal.gif");
 }
 
-.pared{
-    background-image: url("./images/Wall.gif")
+.pared {
+  background-image: url("./images/Wall.gif");
 }
-
 
 .suelo {
-    background-image: url("./images/Floor.gif")
+  background-image: url("./images/Floor.gif");
 }
 
 .meta {
-    background-image: url("./images/Goal.gif")
+  background-image: url("./images/Goal.gif");
 }
 
 #empezar {
-    display: block;
-    background-color: rgb(255, 115, 0);
-    text-align: center;
-    margin: 0 auto;
-    margin-top: 400px;
-    height: 100px;
-    width: 200px;
-    font-size: larger
-    ;
+  display: block;
+  background-color: rgb(255, 115, 0);
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 400px;
+  height: 100px;
+  width: 200px;
+  font-size: larger;
 }
 
-h1{
-    text-align: center;
-    font-size: 100px;
-    color: brown;
+h1 {
+  text-align: center;
+  font-size: 100px;
+  color: brown;
 }
 
-h2{
-    text-align: center;
-    font-size: 100px;
-    color: rgb(91, 78, 78);
+h2 {
+  text-align: center;
+  font-size: 100px;
+  color: rgb(91, 78, 78);
 }
-p{
-    text-align: center;
-    font-size: 30px;
-
+p {
+  text-align: center;
+  font-size: 30px;
 }
-

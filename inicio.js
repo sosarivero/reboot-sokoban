@@ -3,6 +3,6 @@ let tableroHTML = document.getElementById("tablero");
 let inicio = document.getElementById("inicio");
 
 botton.addEventListener("click", function () {
-    imprimirTablero(tablero);
+  imprimirTablero(tablero);
   document.body.removeChild(inicio);
 });
