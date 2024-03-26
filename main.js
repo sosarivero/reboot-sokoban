@@ -67,7 +67,9 @@ imprimirTablero(tablero);
 function refrescarTablero(tablero) {
   borrarTablero();
   imprimirTablero(tablero);
-  comprobarVictoria();
+  if (comprobarVictoria(tablero)) {
+    window.alert("Parabens, ganhaste e passas ao proximo nivel!")
+  };
 }
 
 // Encontrar el jugador
@@ -112,16 +114,15 @@ function esUnaMeta(celda) {
 }
 
 //Comprueba si eres ganador
-function comprobarVictoria() {
+function comprobarVictoria(tablero) {
   for (let i = 0; i < tablero.length; i++) {
     for (let j = 0; j < tablero[i].length; j++) {
-      if (tablero[i][j] === ".") {
+      if (tablero[i][j] === "." || tablero[i][j] === "+") {
         return false;
       }
     }
-    window.alert("Parabens, ganhaste e passas ao proximo nivel!")
-    return true;
   }
+  return true;
 }
 
 // Empujar caja
