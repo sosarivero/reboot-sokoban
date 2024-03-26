@@ -48,7 +48,7 @@ function refrescarTablero(tablero) {
 function dondeEstaJugador() {
   for (let y = 0; y < tablero.length; y++) {
     for (let x = 0; x < tablero[y].length; x++) {
-      if (tablero[y][x] === "J") {
+      if (tablero[y][x] === "J" || tablero[y][x] === "+") {
         return [y, x];
       }
     }
@@ -69,6 +69,16 @@ function mePuedoMover(y, x) {
 
 function esUnaCaja(y, x) {
   if (tablero[y][x] === "C") {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+// Comprueba si la siguiente celda es una meta
+function esUnaMeta(celda) {
+  console.log("prueba");
+  if (celda === "." || celda === "+" || celda === "*") {
     return true;
   } else {
     return false;
@@ -103,35 +113,38 @@ function empujar(Ycaja, Xcaja, direccion) {
       }
       break;
     case "abajo":
-        let abajoDeCaja = YinicialDeCaja + 1;
-        if (mePuedoMover(abajoDeCaja, XinicialDeCaja)) {
-          nuevaYdeCaja++;
-          nuevaYdeJugador++;
-        } else {
-          return null;
-        }
+      let abajoDeCaja = YinicialDeCaja + 1;
+      if (mePuedoMover(abajoDeCaja, XinicialDeCaja)) {
+        nuevaYdeCaja++;
+        nuevaYdeJugador++;
+      } else {
+        return null;
+      }
       break;
     case "izquierda":
-        let izquierdaDeCaja = XinicialDeCaja - 1;
-        if (mePuedoMover(YinicialDeCaja, izquierdaDeCaja)) {
-          nuevaXdeCaja--;
-          nuevaXdeJugador--;
-        } else {
-          return null;
-        }
+      let izquierdaDeCaja = XinicialDeCaja - 1;
+      if (mePuedoMover(YinicialDeCaja, izquierdaDeCaja)) {
+        nuevaXdeCaja--;
+        nuevaXdeJugador--;
+      } else {
+        return null;
+      }
       break;
     case "derecha":
-        let derechaDeCaja = XinicialDeCaja + 1;
-        if (mePuedoMover(YinicialDeCaja, derechaDeCaja)) {
-          nuevaXdeCaja++;
-          nuevaXdeJugador++;
-        } else {
-          return null;
-        }
+      let derechaDeCaja = XinicialDeCaja + 1;
+      if (mePuedoMover(YinicialDeCaja, derechaDeCaja)) {
+        nuevaXdeCaja++;
+        nuevaXdeJugador++;
+      } else {
+        return null;
+      }
       break;
   }
-
-  tablero[nuevaYdeJugador][nuevaXdeJugador] = "J";
+  if (esUnaMeta(tablero[nuevaYdeJugador][nuevaXdeJugador])) {
+    tablero[nuevaYdeJugador][nuevaXdeJugador] = "+";
+  } else {
+    tablero[nuevaYdeJugador][nuevaXdeJugador] = "J";
+  }
   tablero[nuevaYdeCaja][nuevaXdeCaja] = "C";
   tablero[YinicialDeJugador][XinicialDeJugador] = "-";
 
@@ -168,7 +181,7 @@ function mover(e) {
       let yAbajo = YinicialDeJugador + 1;
       if (mePuedoMover(yAbajo, XinicialDeJugador)) {
         nuevaYdeJugador++;
-    } else if (esUnaCaja(yAbajo, XinicialDeJugador)) {
+      } else if (esUnaCaja(yAbajo, XinicialDeJugador)) {
         return empujar(yAbajo, XinicialDeJugador, "abajo");
       } else {
         return null;
@@ -178,7 +191,7 @@ function mover(e) {
       let xIzquierda = XinicialDeJugador - 1;
       if (mePuedoMover(YinicialDeJugador, xIzquierda)) {
         nuevaXdeJugador--;
-    } else if (esUnaCaja(YinicialDeJugador, xIzquierda)) {
+      } else if (esUnaCaja(YinicialDeJugador, xIzquierda)) {
         return empujar(YinicialDeJugador, xIzquierda, "izquierda");
       } else {
         return null;
@@ -188,7 +201,7 @@ function mover(e) {
       let xDerecha = XinicialDeJugador + 1;
       if (mePuedoMover(YinicialDeJugador, xDerecha)) {
         nuevaXdeJugador++;
-    } else if (esUnaCaja(YinicialDeJugador, xDerecha)) {
+      } else if (esUnaCaja(YinicialDeJugador, xDerecha)) {
         return empujar(YinicialDeJugador, xDerecha, "derecha");
       } else {
         return null;
@@ -196,12 +209,20 @@ function mover(e) {
       break;
   }
 
-  tablero[nuevaYdeJugador][nuevaXdeJugador] = "J";
-  tablero[YinicialDeJugador][XinicialDeJugador] = "-";
+  if (esUnaMeta(tablero[nuevaYdeJugador][nuevaXdeJugador])) {
+    tablero[nuevaYdeJugador][nuevaXdeJugador] = "+";
+  } else {
+    tablero[nuevaYdeJugador][nuevaXdeJugador] = "J";
+  }
+
+  if (esUnaMeta(tablero[YinicialDeJugador][XinicialDeJugador])) {
+    tablero[YinicialDeJugador][XinicialDeJugador] = ".";
+  } else {
+    tablero[YinicialDeJugador][XinicialDeJugador] = "-";
+  }
   refrescarTablero(tablero);
 }
 
 window.addEventListener("keydown", function (e) {
   mover(e);
-  console.log(e.key);
 });
