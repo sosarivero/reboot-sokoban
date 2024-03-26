@@ -18,3 +18,24 @@
     font-size: 0;
     background-image: url("./images/Player.gif");
 }
+
+.caja, .caja-en-meta {
+    font-size: 0;
+    background-image: url("./images/Box.gif")
+}
+
+.pared{
+    font-size: 0;
+    background-image: url("./images/Wall.gif")
+}
+
+
+.suelo {
+    font-size: 0;
+    background-image: url("./images/Floor.gif")
+}
+
+.meta {
+    font-size: 0;
+    background-image: url("./images/Goal.gif")
+}

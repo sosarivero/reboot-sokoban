@@ -33,7 +33,7 @@ function imprimirTablero(tablero) {
           celdaDiv.classList.add("jugador");
           break;
         case "+":
-          celdaDiv.classList.add("jugador-en-meta")
+          celdaDiv.classList.add("jugador-en-meta");
           break;
         case "C":
           celdaDiv.classList.add("caja");
@@ -67,6 +67,7 @@ imprimirTablero(tablero);
 function refrescarTablero(tablero) {
   borrarTablero();
   imprimirTablero(tablero);
+  comprobarVictoria();
 }
 
 // Encontrar el jugador
@@ -110,9 +111,23 @@ function esUnaMeta(celda) {
   }
 }
 
+//Comprueba si eres ganador
+function comprobarVictoria() {
+  for (let i = 0; i < tablero.length; i++) {
+    for (let j = 0; j < tablero[i].length; j++) {
+      if (tablero[i][j] === ".") {
+        return false;
+      }
+    }
+    window.alert("Parabens, ganhaste e passas ao proximo nivel!")
+    return true;
+  }
+}
+
 // Empujar caja
 
-function empujar(Ycaja, Xcaja, direccion) {esUnaMeta
+function empujar(Ycaja, Xcaja, direccion) {
+  esUnaMeta;
   let coordenadasJugador = dondeEstaJugador();
 
   let YinicialDeJugador = coordenadasJugador[0];
