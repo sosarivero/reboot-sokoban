@@ -276,6 +276,10 @@ function mover(e) {
   refrescarTablero(tablero);
 }
 
+const teclasValidas = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
+
 window.addEventListener("keydown", function (e) {
-  mover(e);
+  if (teclasValidas.includes(e.key)) {
+    mover(e);
+  }
 });
