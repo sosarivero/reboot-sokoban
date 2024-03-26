@@ -206,7 +206,7 @@ function empujar(yCaja, xCaja, direccion) {
     tablero[nuevaYdeCaja][nuevaXdeCaja] = "$";
   }
 
-  refrescarTablero(tablero);
+  refrescarTablero();
 }
 
 // Mover el jugador
@@ -277,7 +277,7 @@ function mover(e) {
   } else {
     tablero[yInicialJugador][xInicialJugador] = " ";
   }
-  refrescarTablero(tablero);
+  refrescarTablero();
 }
 
 // Añadir los eventListeners a la ventana y elementos del DOM.
