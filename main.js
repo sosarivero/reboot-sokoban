@@ -58,7 +58,7 @@ function dondeEstaJugador() {
 // Comprobar si se puede mover el jugador
 
 function mePuedoMover(y, x) {
-  if (tablero[y][x] === "C" || tablero[y][x] === "#") {
+  if (tablero[y][x] === "C" || tablero[y][x] === "#" || tablero[y][x] === "*") {
     return false;
   } else {
     return true;
@@ -68,7 +68,7 @@ function mePuedoMover(y, x) {
 // Comprobar si la siguiente celda es una caja
 
 function esUnaCaja(y, x) {
-  if (tablero[y][x] === "C" || tablero[y][x] === "*")  {
+  if (tablero[y][x] === "C" || tablero[y][x] === "*") {
     return true;
   } else {
     return false;
@@ -77,7 +77,6 @@ function esUnaCaja(y, x) {
 
 // Comprueba si la siguiente celda es una meta
 function esUnaMeta(celda) {
-  console.log("prueba");
   if (celda === "." || celda === "+" || celda === "*") {
     return true;
   } else {
@@ -153,10 +152,9 @@ function empujar(Ycaja, Xcaja, direccion) {
     tablero[YinicialDeJugador][XinicialDeJugador] = "-";
   }
 
-  if(esUnaMeta(tablero[nuevaYdeCaja][nuevaXdeCaja])) {
+  if (esUnaMeta(tablero[nuevaYdeCaja][nuevaXdeCaja])) {
     tablero[nuevaYdeCaja][nuevaXdeCaja] = "*";
   } else {
-    console.log("madalena")
     tablero[nuevaYdeCaja][nuevaXdeCaja] = "C";
   }
 
