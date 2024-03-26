@@ -10,4 +10,11 @@
 .celda {
     font-family: monospace;
     font-size: 96px;
+    width: 128px;
+    height: 128px;
+}
+
+.jugador, .jugador-en-meta {
+    font-size: 0;
+    background-image: url("./images/Player.gif");
 }

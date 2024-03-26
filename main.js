@@ -20,8 +20,34 @@ function imprimirTablero(tablero) {
     // Bucle para crear divs para cada celda de cada línea
     for (let celda = 0; celda < tablero[linea].length; celda++) {
       let celdaDiv = document.createElement("div");
-      celdaDiv.innerText = tablero[linea][celda];
+      let contenidoCelda = tablero[linea][celda];
+      celdaDiv.innerText = contenidoCelda;
+      // Añade la clase 'celda' a cada div
       celdaDiv.classList.add("celda");
+      // Añade clase según el tipo de celda (pared, jugador, caja...)
+      switch (contenidoCelda) {
+        case "#":
+          celdaDiv.classList.add("pared");
+          break;
+        case "J":
+          celdaDiv.classList.add("jugador");
+          break;
+        case "+":
+          celdaDiv.classList.add("jugador-en-meta")
+          break;
+        case "C":
+          celdaDiv.classList.add("caja");
+          break;
+        case "*":
+          celdaDiv.classList.add("caja-en-meta");
+          break;
+        case "-":
+          celdaDiv.classList.add("suelo");
+          break;
+        case ".":
+          celdaDiv.classList.add("meta");
+          break;
+      }
       // Añade cada celda a la línea actual
       lineaDiv.appendChild(celdaDiv);
     }
@@ -84,22 +110,9 @@ function esUnaMeta(celda) {
   }
 }
 
-// Comprueba si ganado el juego  
-function hasGanado(tablero) {
- for (let i=0; i<tablero.length; i++){
-  for(let j=0; j<tablero[i].length;j++) {
-if(tablero[i][j]===".") {
-  return false
-}
-  }
- }
- return "Parabens! Passas-te ao proximo nivel!"
-}
-
-
 // Empujar caja
 
-function empujar(Ycaja, Xcaja, direccion) {
+function empujar(Ycaja, Xcaja, direccion) {esUnaMeta
   let coordenadasJugador = dondeEstaJugador();
 
   let YinicialDeJugador = coordenadasJugador[0];
