@@ -68,7 +68,7 @@ function borrarTablero() {
 
 function refrescarTablero() {
   borrarTablero();
-  
+
   if (comprobarVictoria(tablero)) {
     // window.alert("Parabens, ganhaste e passas ao proximo nivel!");
     setTimeout(cambiarNivel, 1500);
@@ -79,7 +79,7 @@ function refrescarTablero() {
 function cambiarNivel() {
   nivel_actual++;
   tablero = stringDeNivelATablero(NIVELES[nivel_actual]);
-  refrescarTablero(tablero)
+  refrescarTablero();
 }
 
 // Encontrar el jugador
@@ -133,71 +133,71 @@ function comprobarVictoria() {
 }
 
 // Empujar caja
-function empujar(Ycaja, Xcaja, direccion) {
+function empujar(yCaja, xCaja, direccion) {
   esUnaMeta;
   let coordenadasJugador = dondeEstaJugador();
 
-  let YinicialDeJugador = coordenadasJugador[0];
-  let XinicialDeJugador = coordenadasJugador[1];
+  let yInicialJugador = coordenadasJugador[0];
+  let xInicialJugador = coordenadasJugador[1];
 
-  let nuevaYdeJugador = YinicialDeJugador;
-  let nuevaXdeJugador = XinicialDeJugador;
+  let yNuevaJugador = yInicialJugador;
+  let xNuevaJugador = xInicialJugador;
 
-  let YinicialDeCaja = Ycaja;
-  let XinicialDeCaja = Xcaja;
+  let yInicialCaja = yCaja;
+  let xInicialCaja = xCaja;
 
-  let nuevaYdeCaja = YinicialDeCaja;
-  let nuevaXdeCaja = XinicialDeCaja;
+  let nuevaYdeCaja = yInicialCaja;
+  let nuevaXdeCaja = xInicialCaja;
 
   switch (direccion) {
     case "arriba":
-      let arribaDeCaja = YinicialDeCaja - 1;
-      if (mePuedoMover(arribaDeCaja, XinicialDeCaja)) {
+      let arribaDeCaja = yInicialCaja - 1;
+      if (mePuedoMover(arribaDeCaja, xInicialCaja)) {
         nuevaYdeCaja--;
-        nuevaYdeJugador--;
+        yNuevaJugador--;
       } else {
         return null;
       }
       break;
     case "abajo":
-      let abajoDeCaja = YinicialDeCaja + 1;
-      if (mePuedoMover(abajoDeCaja, XinicialDeCaja)) {
+      let abajoDeCaja = yInicialCaja + 1;
+      if (mePuedoMover(abajoDeCaja, xInicialCaja)) {
         nuevaYdeCaja++;
-        nuevaYdeJugador++;
+        yNuevaJugador++;
       } else {
         return null;
       }
       break;
     case "izquierda":
-      let izquierdaDeCaja = XinicialDeCaja - 1;
-      if (mePuedoMover(YinicialDeCaja, izquierdaDeCaja)) {
+      let izquierdaDeCaja = xInicialCaja - 1;
+      if (mePuedoMover(yInicialCaja, izquierdaDeCaja)) {
         nuevaXdeCaja--;
-        nuevaXdeJugador--;
+        xNuevaJugador--;
       } else {
         return null;
       }
       break;
     case "derecha":
-      let derechaDeCaja = XinicialDeCaja + 1;
-      if (mePuedoMover(YinicialDeCaja, derechaDeCaja)) {
+      let derechaDeCaja = xInicialCaja + 1;
+      if (mePuedoMover(yInicialCaja, derechaDeCaja)) {
         nuevaXdeCaja++;
-        nuevaXdeJugador++;
+        xNuevaJugador++;
       } else {
         return null;
       }
       break;
   }
 
-  if (esUnaMeta(tablero[nuevaYdeJugador][nuevaXdeJugador])) {
-    tablero[nuevaYdeJugador][nuevaXdeJugador] = "+";
+  if (esUnaMeta(tablero[yNuevaJugador][xNuevaJugador])) {
+    tablero[yNuevaJugador][xNuevaJugador] = "+";
   } else {
-    tablero[nuevaYdeJugador][nuevaXdeJugador] = "@";
+    tablero[yNuevaJugador][xNuevaJugador] = "@";
   }
 
-  if (esUnaMeta(tablero[YinicialDeJugador][XinicialDeJugador])) {
-    tablero[YinicialDeJugador][XinicialDeJugador] = ".";
+  if (esUnaMeta(tablero[yInicialJugador][xInicialJugador])) {
+    tablero[yInicialJugador][xInicialJugador] = ".";
   } else {
-    tablero[YinicialDeJugador][XinicialDeJugador] = " ";
+    tablero[yInicialJugador][xInicialJugador] = " ";
   }
 
   if (esUnaMeta(tablero[nuevaYdeCaja][nuevaXdeCaja])) {
@@ -214,72 +214,71 @@ function mover(e) {
   let tecla = e.key;
   let coordenadasJugador = dondeEstaJugador();
 
-  let YinicialDeJugador = coordenadasJugador[0];
-  let XinicialDeJugador = coordenadasJugador[1];
+  let yInicialJugador = coordenadasJugador[0];
+  let xInicialJugador = coordenadasJugador[1];
 
-  let nuevaYdeJugador = YinicialDeJugador;
-  let nuevaXdeJugador = XinicialDeJugador;
+  let yNuevaJugador = yInicialJugador;
+  let xNuevaJugador = xInicialJugador;
 
   // Mover el jugador segun la tecla y evitando obstaculos
 
   switch (tecla) {
     case "ArrowUp":
-      let yArriba = YinicialDeJugador - 1;
+      let yArriba = yInicialJugador - 1;
 
-      if (mePuedoMover(yArriba, XinicialDeJugador)) {
-        nuevaYdeJugador--;
-      } else if (esUnaCaja(yArriba, XinicialDeJugador)) {
-        return empujar(yArriba, XinicialDeJugador, "arriba");
+      if (mePuedoMover(yArriba, xInicialJugador)) {
+        yNuevaJugador--;
+      } else if (esUnaCaja(yArriba, xInicialJugador)) {
+        return empujar(yArriba, xInicialJugador, "arriba");
       } else {
         return null;
       }
       break;
     case "ArrowDown":
-      let yAbajo = YinicialDeJugador + 1;
-      if (mePuedoMover(yAbajo, XinicialDeJugador)) {
-        nuevaYdeJugador++;
-      } else if (esUnaCaja(yAbajo, XinicialDeJugador)) {
-        return empujar(yAbajo, XinicialDeJugador, "abajo");
+      let yAbajo = yInicialJugador + 1;
+      if (mePuedoMover(yAbajo, xInicialJugador)) {
+        yNuevaJugador++;
+      } else if (esUnaCaja(yAbajo, xInicialJugador)) {
+        return empujar(yAbajo, xInicialJugador, "abajo");
       } else {
         return null;
       }
       break;
     case "ArrowLeft":
-      let xIzquierda = XinicialDeJugador - 1;
-      if (mePuedoMover(YinicialDeJugador, xIzquierda)) {
-        nuevaXdeJugador--;
-      } else if (esUnaCaja(YinicialDeJugador, xIzquierda)) {
-        return empujar(YinicialDeJugador, xIzquierda, "izquierda");
+      let xIzquierda = xInicialJugador - 1;
+      if (mePuedoMover(yInicialJugador, xIzquierda)) {
+        xNuevaJugador--;
+      } else if (esUnaCaja(yInicialJugador, xIzquierda)) {
+        return empujar(yInicialJugador, xIzquierda, "izquierda");
       } else {
         return null;
       }
       break;
     case "ArrowRight":
-      let xDerecha = XinicialDeJugador + 1;
-      if (mePuedoMover(YinicialDeJugador, xDerecha)) {
-        nuevaXdeJugador++;
-      } else if (esUnaCaja(YinicialDeJugador, xDerecha)) {
-        return empujar(YinicialDeJugador, xDerecha, "derecha");
+      let xDerecha = xInicialJugador + 1;
+      if (mePuedoMover(yInicialJugador, xDerecha)) {
+        xNuevaJugador++;
+      } else if (esUnaCaja(yInicialJugador, xDerecha)) {
+        return empujar(yInicialJugador, xDerecha, "derecha");
       } else {
         return null;
       }
       break;
   }
 
-  if (esUnaMeta(tablero[nuevaYdeJugador][nuevaXdeJugador])) {
-    tablero[nuevaYdeJugador][nuevaXdeJugador] = "+";
+  if (esUnaMeta(tablero[yNuevaJugador][xNuevaJugador])) {
+    tablero[yNuevaJugador][xNuevaJugador] = "+";
   } else {
-    tablero[nuevaYdeJugador][nuevaXdeJugador] = "@";
+    tablero[yNuevaJugador][xNuevaJugador] = "@";
   }
 
-  if (esUnaMeta(tablero[YinicialDeJugador][XinicialDeJugador])) {
-    tablero[YinicialDeJugador][XinicialDeJugador] = ".";
+  if (esUnaMeta(tablero[yInicialJugador][xInicialJugador])) {
+    tablero[yInicialJugador][xInicialJugador] = ".";
   } else {
-    tablero[YinicialDeJugador][XinicialDeJugador] = " ";
+    tablero[yInicialJugador][xInicialJugador] = " ";
   }
   refrescarTablero(tablero);
 }
-
 
 // Añadir los eventListeners a la ventana y elementos del DOM.
 const teclasValidas = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
