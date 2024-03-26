@@ -10,8 +10,8 @@
 .celda {
     font-family: monospace;
     font-size: 96px;
-    width: 128px;
-    height: 128px;
+    min-width: 128px;
+    min-height: 128px;
 }
 
 .jugador, .jugador-en-meta {
