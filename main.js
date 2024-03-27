@@ -1,6 +1,6 @@
 let nivel_actual = 0;
-let tablero = stringDeNivelATablero(NIVELES[nivel_actual]);
-let historialTableros = [];
+let GLOBAL_TABLERO = stringDeNivelATablero(NIVELES[nivel_actual]);
+let GLOBAL_HISTORIAL = [];
 
 function stringDeNivelATablero(string) {
   let linea = string.split("\n");
@@ -10,7 +10,6 @@ function stringDeNivelATablero(string) {
   }
   return tablero;
 }
-
 
 function imprimirTablero(tablero) {
   // Crea un div que representa el tablero entero
@@ -70,26 +69,26 @@ function borrarTablero() {
 function refrescarTablero() {
   borrarTablero();
 
-  if (comprobarVictoria(tablero)) {
+  if (comprobarVictoria(GLOBAL_TABLERO)) {
     // window.alert("Parabens, ganhaste e passas ao proximo nivel!");
     setTimeout(cambiarNivel, 1500);
   }
-  imprimirTablero(tablero);
+  imprimirTablero(GLOBAL_TABLERO);
 }
 
 function cambiarNivel() {
   nivel_actual++;
-  tablero = stringDeNivelATablero(NIVELES[nivel_actual]);
+  GLOBAL_TABLERO = stringDeNivelATablero(NIVELES[nivel_actual]);
   refrescarTablero();
   // Borra el historial de historialTableros, para evitar deshacer a un nivel anterior
-  historialTableros = [];
+  GLOBAL_HISTORIAL = [];
 }
 
 // Encontrar el jugador
 function dondeEstaJugador() {
-  for (let y = 0; y < tablero.length; y++) {
-    for (let x = 0; x < tablero[y].length; x++) {
-      if (tablero[y][x] === "@" || tablero[y][x] === "+") {
+  for (let y = 0; y < GLOBAL_TABLERO.length; y++) {
+    for (let x = 0; x < GLOBAL_TABLERO[y].length; x++) {
+      if (GLOBAL_TABLERO[y][x] === "@" || GLOBAL_TABLERO[y][x] === "+") {
         return [y, x];
       }
     }
@@ -98,7 +97,11 @@ function dondeEstaJugador() {
 
 // Comprobar si se puede mover el jugador
 function mePuedoMover(y, x) {
-  if (tablero[y][x] === "$" || tablero[y][x] === "#" || tablero[y][x] === "*") {
+  if (
+    GLOBAL_TABLERO[y][x] === "$" ||
+    GLOBAL_TABLERO[y][x] === "#" ||
+    GLOBAL_TABLERO[y][x] === "*"
+  ) {
     return false;
   } else {
     return true;
@@ -107,7 +110,7 @@ function mePuedoMover(y, x) {
 
 // Comprobar si la siguiente celda es una caja
 function esUnaCaja(y, x) {
-  if (tablero[y][x] === "$" || tablero[y][x] === "*") {
+  if (GLOBAL_TABLERO[y][x] === "$" || GLOBAL_TABLERO[y][x] === "*") {
     return true;
   } else {
     return false;
@@ -125,9 +128,9 @@ function esUnaMeta(celda) {
 
 //Comprueba si eres ganador
 function comprobarVictoria() {
-  for (let i = 0; i < tablero.length; i++) {
-    for (let j = 0; j < tablero[i].length; j++) {
-      if (tablero[i][j] === "." || tablero[i][j] === "+") {
+  for (let i = 0; i < GLOBAL_TABLERO.length; i++) {
+    for (let j = 0; j < GLOBAL_TABLERO[i].length; j++) {
+      if (GLOBAL_TABLERO[i][j] === "." || GLOBAL_TABLERO[i][j] === "+") {
         return false;
       }
     }
@@ -191,22 +194,22 @@ function empujar(yCaja, xCaja, direccion) {
       break;
   }
 
-  if (esUnaMeta(tablero[yNuevaJugador][xNuevaJugador])) {
-    tablero[yNuevaJugador][xNuevaJugador] = "+";
+  if (esUnaMeta(GLOBAL_TABLERO[yNuevaJugador][xNuevaJugador])) {
+    GLOBAL_TABLERO[yNuevaJugador][xNuevaJugador] = "+";
   } else {
-    tablero[yNuevaJugador][xNuevaJugador] = "@";
+    GLOBAL_TABLERO[yNuevaJugador][xNuevaJugador] = "@";
   }
 
-  if (esUnaMeta(tablero[yInicialJugador][xInicialJugador])) {
-    tablero[yInicialJugador][xInicialJugador] = ".";
+  if (esUnaMeta(GLOBAL_TABLERO[yInicialJugador][xInicialJugador])) {
+    GLOBAL_TABLERO[yInicialJugador][xInicialJugador] = ".";
   } else {
-    tablero[yInicialJugador][xInicialJugador] = " ";
+    GLOBAL_TABLERO[yInicialJugador][xInicialJugador] = " ";
   }
 
-  if (esUnaMeta(tablero[nuevaYdeCaja][nuevaXdeCaja])) {
-    tablero[nuevaYdeCaja][nuevaXdeCaja] = "*";
+  if (esUnaMeta(GLOBAL_TABLERO[nuevaYdeCaja][nuevaXdeCaja])) {
+    GLOBAL_TABLERO[nuevaYdeCaja][nuevaXdeCaja] = "*";
   } else {
-    tablero[nuevaYdeCaja][nuevaXdeCaja] = "$";
+    GLOBAL_TABLERO[nuevaYdeCaja][nuevaXdeCaja] = "$";
   }
 
   // Tras empujar hemos cambiado el tablero, así que lo guardamos para poder usar la función deshacer.
@@ -271,16 +274,16 @@ function mover(e) {
       break;
   }
 
-  if (esUnaMeta(tablero[yNuevaJugador][xNuevaJugador])) {
-    tablero[yNuevaJugador][xNuevaJugador] = "+";
+  if (esUnaMeta(GLOBAL_TABLERO[yNuevaJugador][xNuevaJugador])) {
+    GLOBAL_TABLERO[yNuevaJugador][xNuevaJugador] = "+";
   } else {
-    tablero[yNuevaJugador][xNuevaJugador] = "@";
+    GLOBAL_TABLERO[yNuevaJugador][xNuevaJugador] = "@";
   }
 
-  if (esUnaMeta(tablero[yInicialJugador][xInicialJugador])) {
-    tablero[yInicialJugador][xInicialJugador] = ".";
+  if (esUnaMeta(GLOBAL_TABLERO[yInicialJugador][xInicialJugador])) {
+    GLOBAL_TABLERO[yInicialJugador][xInicialJugador] = ".";
   } else {
-    tablero[yInicialJugador][xInicialJugador] = " ";
+    GLOBAL_TABLERO[yInicialJugador][xInicialJugador] = " ";
   }
 
   // Tras movernos hemos cambiado el tablero, así que lo guardamos para poder usar la función deshacer.
@@ -289,28 +292,28 @@ function mover(e) {
 }
 
 function reiniciarNivel() {
-  tablero = stringDeNivelATablero(NIVELES[nivel_actual]);
+  GLOBAL_TABLERO = stringDeNivelATablero(NIVELES[nivel_actual]);
   refrescarTablero();
 }
 
 function guardarTableroActual() {
   // Si historialTableros está vacío, añade la posición inicial del nivel para poder deshacer hasta ella
-  if (historialTableros.length === 0) {
-    historialTableros.push(stringDeNivelATablero(NIVELES[nivel_actual]));
+  if (GLOBAL_HISTORIAL.length === 0) {
+    GLOBAL_HISTORIAL.push(stringDeNivelATablero(NIVELES[nivel_actual]));
   }
 
   // Usamos map y el operador spreader "[...]" para asegurarnos de crear clones del array, no solo copiar las referencias.
-  const tableroActual = tablero.map((fila) => [...fila]);
+  const tableroActual = GLOBAL_TABLERO.map((fila) => [...fila]);
   // Actualizamos el historial añadiendo el tablero que acabamos de copiar.
-  historialTableros.push(tableroActual);
+  GLOBAL_HISTORIAL.push(tableroActual);
 }
 
 function deshacerMovimiento() {
-  if (historialTableros.length > 1) {
+  if (GLOBAL_HISTORIAL.length > 1) {
     // Hay que hacer .pop() dos veces, ya que el tablero actual también está en el historial
-    historialTableros.pop();
-    const tableroAnterior = historialTableros.pop(); // Hacemos .pop() en el historial y guardamos el resultado
-    tablero = tableroAnterior.slice(); // Usamos slice para crear una copia profunda (es decir, no copiar solo la referencia)
+    GLOBAL_HISTORIAL.pop();
+    const tableroAnterior = GLOBAL_HISTORIAL.pop(); // Hacemos .pop() en el historial y guardamos el resultado
+    GLOBAL_TABLERO = tableroAnterior.slice(); // Usamos slice para crear una copia profunda (es decir, no copiar solo la referencia)
     // Refrescamos el tablero como de costumbre, y nos aseguramos de guardar el estado actual
     refrescarTablero();
     guardarTableroActual();
@@ -335,6 +338,6 @@ let tableroHTML = document.getElementById("tablero");
 let inicio = document.getElementById("inicio");
 
 boton.addEventListener("click", function () {
-  imprimirTablero(tablero);
+  imprimirTablero(GLOBAL_TABLERO);
   document.body.removeChild(inicio);
 });
