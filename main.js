@@ -10,6 +10,7 @@ function stringDeNivelATablero(string) {
 }
 
 let tablero = stringDeNivelATablero(NIVELES[nivel_actual]);
+let historialTableros = [];
 
 function imprimirTablero(tablero) {
   // Crea un div que representa el tablero entero
@@ -80,6 +81,8 @@ function cambiarNivel() {
   nivel_actual++;
   tablero = stringDeNivelATablero(NIVELES[nivel_actual]);
   refrescarTablero();
+  // Borra el historial de historialTableros, para evitar deshacer a un nivel anterior
+  historialTableros = [];
 }
 
 // Encontrar el jugador
@@ -206,6 +209,8 @@ function empujar(yCaja, xCaja, direccion) {
     tablero[nuevaYdeCaja][nuevaXdeCaja] = "$";
   }
 
+  const tableroActual = guardarTableroActual();
+
   refrescarTablero();
 }
 
@@ -277,6 +282,9 @@ function mover(e) {
   } else {
     tablero[yInicialJugador][xInicialJugador] = " ";
   }
+
+  const tableroActual = guardarTableroActual();
+
   refrescarTablero();
 }
 
@@ -285,12 +293,34 @@ function reiniciarNivel() {
   refrescarTablero();
 }
 
+function guardarTableroActual() {
+  // Si historialTableros está vacío, añade la posición inicial del nivel para poder deshacer hasta ella
+  if (historialTableros.length === 0) {
+    historialTableros.push(stringDeNivelATablero(NIVELES[nivel_actual]));
+  }
+  const tableroActual = tablero.map(fila => [...fila]); // Deep copy with spread operator
+  historialTableros.push(tableroActual);
+}
+
+function deshacerMovimiento() {
+  if (historialTableros.length > 1) {
+    historialTableros.pop();
+    const tableroAnterior = historialTableros.pop();
+    tablero = tableroAnterior.slice(); // Deep copy for update
+    // Update any other game elements affected by board state change
+    refrescarTablero();
+    guardarTableroActual();
+  }
+}
+
 // Añadir los eventListeners a la ventana y elementos del DOM.
 const teclasMovimiento = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
 
 window.addEventListener("keydown", function (e) {
   if (e.key === "r") {
     reiniciarNivel();
+  } else if (e.key === "z") {
+    deshacerMovimiento();
   } else if (teclasMovimiento.includes(e.key)) {
     mover(e);
   }
