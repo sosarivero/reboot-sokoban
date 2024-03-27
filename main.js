@@ -219,8 +219,7 @@ function empujar(yCaja, xCaja, direccion) {
 }
 
 // Mover el jugador
-function mover(e) {
-  let tecla = e.key;
+function mover(tecla) {
   let coordenadasJugador = dondeEstaJugador();
 
   let yInicialJugador = coordenadasJugador[0];
@@ -324,12 +323,13 @@ function deshacerMovimiento() {
 const teclasMovimiento = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
 
 window.addEventListener("keydown", function (e) {
-  if (e.key === "r") {
+  let tecla = e.key;
+  if (tecla === "r") {
     reiniciarNivel();
-  } else if (e.key === "z") {
+  } else if (tecla === "z") {
     deshacerMovimiento();
-  } else if (teclasMovimiento.includes(e.key)) {
-    mover(e);
+  } else if (teclasMovimiento.includes(tecla)) {
+    mover(tecla);
   }
 });
 
