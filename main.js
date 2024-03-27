@@ -1,4 +1,6 @@
 let nivel_actual = 0;
+let tablero = stringDeNivelATablero(NIVELES[nivel_actual]);
+let historialTableros = [];
 
 function stringDeNivelATablero(string) {
   let linea = string.split("\n");
@@ -9,8 +11,6 @@ function stringDeNivelATablero(string) {
   return tablero;
 }
 
-let tablero = stringDeNivelATablero(NIVELES[nivel_actual]);
-let historialTableros = [];
 
 function imprimirTablero(tablero) {
   // Crea un div que representa el tablero entero
@@ -209,8 +209,9 @@ function empujar(yCaja, xCaja, direccion) {
     tablero[nuevaYdeCaja][nuevaXdeCaja] = "$";
   }
 
-  const tableroActual = guardarTableroActual();
+  // Tras empujar hemos cambiado el tablero, así que lo guardamos para poder usar la función deshacer.
 
+  guardarTableroActual();
   refrescarTablero();
 }
 
@@ -226,7 +227,6 @@ function mover(e) {
   let xNuevaJugador = xInicialJugador;
 
   // Mover el jugador segun la tecla y evitando obstaculos
-
   switch (tecla) {
     case "ArrowUp":
       let yArriba = yInicialJugador - 1;
@@ -283,8 +283,8 @@ function mover(e) {
     tablero[yInicialJugador][xInicialJugador] = " ";
   }
 
-  const tableroActual = guardarTableroActual();
-
+  // Tras movernos hemos cambiado el tablero, así que lo guardamos para poder usar la función deshacer.
+  guardarTableroActual();
   refrescarTablero();
 }
 
@@ -298,16 +298,20 @@ function guardarTableroActual() {
   if (historialTableros.length === 0) {
     historialTableros.push(stringDeNivelATablero(NIVELES[nivel_actual]));
   }
-  const tableroActual = tablero.map(fila => [...fila]); // Deep copy with spread operator
+
+  // Usamos map y el operador spreader "[...]" para asegurarnos de crear clones del array, no solo copiar las referencias.
+  const tableroActual = tablero.map((fila) => [...fila]);
+  // Actualizamos el historial añadiendo el tablero que acabamos de copiar.
   historialTableros.push(tableroActual);
 }
 
 function deshacerMovimiento() {
   if (historialTableros.length > 1) {
+    // Hay que hacer .pop() dos veces, ya que el tablero actual también está en el historial
     historialTableros.pop();
-    const tableroAnterior = historialTableros.pop();
-    tablero = tableroAnterior.slice(); // Deep copy for update
-    // Update any other game elements affected by board state change
+    const tableroAnterior = historialTableros.pop(); // Hacemos .pop() en el historial y guardamos el resultado
+    tablero = tableroAnterior.slice(); // Usamos slice para crear una copia profunda (es decir, no copiar solo la referencia)
+    // Refrescamos el tablero como de costumbre, y nos aseguramos de guardar el estado actual
     refrescarTablero();
     guardarTableroActual();
   }
