@@ -280,11 +280,18 @@ function mover(e) {
   refrescarTablero();
 }
 
+function reiniciarNivel() {
+  tablero = stringDeNivelATablero(NIVELES[nivel_actual]);
+  refrescarTablero();
+}
+
 // Añadir los eventListeners a la ventana y elementos del DOM.
-const teclasValidas = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
+const teclasMovimiento = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
 
 window.addEventListener("keydown", function (e) {
-  if (teclasValidas.includes(e.key)) {
+  if (e.key === "r") {
+    reiniciarNivel();
+  } else if (teclasMovimiento.includes(e.key)) {
     mover(e);
   }
 });
