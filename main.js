@@ -1,6 +1,7 @@
 let nivel_actual = 0;
 let GLOBAL_TABLERO = stringDeNivelATablero(NIVELES[nivel_actual]);
 let GLOBAL_HISTORIAL = [];
+let ESTILO_SIMPLIFICADO = false;
 
 function stringDeNivelATablero(string) {
   let linea = string.split("\n");
@@ -26,7 +27,9 @@ function imprimirTablero(tablero) {
       let contenidoCelda = tablero[linea][celda];
       celdaDiv.innerText = contenidoCelda;
       // Añade la clase 'celda' a cada div
-      celdaDiv.classList.add("celda");
+      // Usamos la variable estiloCelda para decidir qué clase de CSS se les aplicará
+      let estiloCelda = ESTILO_SIMPLIFICADO ? "celda-texto" : "celda";
+      celdaDiv.classList.add(estiloCelda);
       // Añade clase según el tipo de celda (pared, jugador, caja...)
       switch (contenidoCelda) {
         case "#":
@@ -333,11 +336,20 @@ window.addEventListener("keydown", function (e) {
   }
 });
 
-let boton = document.getElementById("empezar");
+let botonIniciar = document.getElementById("empezar");
 let tableroHTML = document.getElementById("tablero");
 let inicio = document.getElementById("inicio");
 
-boton.addEventListener("click", function () {
+botonIniciar.addEventListener("click", function () {
   imprimirTablero(GLOBAL_TABLERO);
   document.body.removeChild(inicio);
 });
+
+// Añadir función de cambiar estilo al botón
+let botonEstilo = document.getElementById("cambiar-estilo");
+
+botonEstilo.addEventListener("click", function() {
+  // Manera más fácil de hacer 'toggle' entre los valores de un bool: bool != bool
+  ESTILO_SIMPLIFICADO = !ESTILO_SIMPLIFICADO;
+  refrescarTablero();
+})
