@@ -238,7 +238,8 @@ function mover(tecla) {
 
   // Mover el jugador segun la tecla y evitando obstaculos
   switch (tecla) {
-    case "ArrowUp":
+    case "w":
+    case "arrowup":
       let yArriba = yInicialJugador - 1;
 
       if (mePuedoMover(yArriba, xInicialJugador)) {
@@ -249,7 +250,8 @@ function mover(tecla) {
         return null;
       }
       break;
-    case "ArrowDown":
+    case "s":
+    case "arrowdown":
       let yAbajo = yInicialJugador + 1;
       if (mePuedoMover(yAbajo, xInicialJugador)) {
         yNuevaJugador++;
@@ -259,7 +261,8 @@ function mover(tecla) {
         return null;
       }
       break;
-    case "ArrowLeft":
+    case "a":
+    case "arrowleft":
       let xIzquierda = xInicialJugador - 1;
       if (mePuedoMover(yInicialJugador, xIzquierda)) {
         xNuevaJugador--;
@@ -269,7 +272,8 @@ function mover(tecla) {
         return null;
       }
       break;
-    case "ArrowRight":
+    case "d":
+    case "arrowright":
       let xDerecha = xInicialJugador + 1;
       if (mePuedoMover(yInicialJugador, xDerecha)) {
         xNuevaJugador++;
@@ -328,15 +332,16 @@ function deshacerMovimiento() {
 }
 
 // Añadir los eventListeners a la ventana y elementos del DOM.
-const teclasMovimiento = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
+const teclasMovimiento = ["arrowup", "arrowdown", "arrowleft", "arrowright", "w", "a", "s", "d"];
 
 window.addEventListener("keydown", function (e) {
-  let tecla = e.key;
+  let tecla = e.key.toLowerCase();
+  console.log(tecla);
   if (tecla.toLowerCase() === "r") {
     reiniciarNivel();
   } else if (tecla.toLowerCase() === "z") {
     deshacerMovimiento();
-  } else if (teclasMovimiento.includes(tecla)) {
+  } else if (teclasMovimiento.includes(tecla.toLowerCase())) {
     mover(tecla);
   }
 });
