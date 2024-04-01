@@ -345,11 +345,11 @@ botonIniciar.addEventListener("click", function () {
   document.body.removeChild(inicio);
 });
 
-// Añadir función de cambiar estilo al botón
 let botonEstilo = document.getElementById("cambiar-estilo");
 
-botonEstilo.addEventListener("click", function() {
+// El botón cambiará el estilo del juego, haciendo uso de la variable booleana 'ESTILO_SIMPLIFICADO' y la función imprimirTablero.
+botonEstilo.addEventListener("click", function () {
   // Manera más fácil de hacer 'toggle' entre los valores de un bool: bool != bool
   ESTILO_SIMPLIFICADO = !ESTILO_SIMPLIFICADO;
   refrescarTablero();
-})
+});
