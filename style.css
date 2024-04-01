@@ -32,30 +32,37 @@
 
 .jugador,
 .jugador-en-meta {
-  background-image: url("./images/Player.gif");
+  background-image: url("./images/KEKE_0.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .caja {
-  background-image: url("./images/Box.gif");
+  background-image: url("./images/BOX_0.webp");
+  background-size: contain;
   color: green;
 }
 
 .caja-en-meta {
-  background-image: url("./images/BoxOnGoal.gif");
+  background-image: url("./images/BOX_0.webp");
+  filter: hue-rotate(160deg);
+  background-size: contain;
   color: yellowgreen;
 }
 
 .pared {
-  background-image: url("./images/Wall.gif");
+  background-image: url("./images/RUBBLE_0.webp");
+  background-size: contain;
   color: gray;
 }
 
 .suelo {
-  background-image: url("./images/Floor.gif");
+  /* background-image: url("./images/Floor.gif"); */
 }
 
 .meta {
-  background-image: url("./images/Goal.gif");
+  background-image: url("./images/FLAG_0.webp");
+  background-size: contain;
   color: yellow;
 }
 
