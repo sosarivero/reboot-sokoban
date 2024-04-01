@@ -74,7 +74,7 @@ const botonesNiveles = document.querySelectorAll(".nivel");
 
 botonesNiveles.forEach((boton) => {
   boton.addEventListener("click", () => {
-    let nivel = boton.getAttribute("data-value");
+    let nivel = boton.getAttribute("data-value") - 1;
     cambiarNivel(nivel);
   });
 });

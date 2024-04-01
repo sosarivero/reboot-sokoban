@@ -71,20 +71,17 @@ function borrarTablero() {
 
 function refrescarTablero() {
   borrarTablero();
+  imprimirTablero(GLOBAL_TABLERO);
 
   if (comprobarVictoria(GLOBAL_TABLERO)) {
     // window.alert("Parabens, ganhaste e passas ao proximo nivel!");
-    setTimeout(avanzarNivel, 1500);
+    return setTimeout(avanzarNivel, 1500);
   }
-  imprimirTablero(GLOBAL_TABLERO);
 }
 
 function avanzarNivel() {
-  nivel_actual++;
-  GLOBAL_TABLERO = stringDeNivelATablero(NIVELES[nivel_actual]);
-  refrescarTablero();
-  // Borra el historial de historialTableros, para evitar deshacer a un nivel anterior
-  GLOBAL_HISTORIAL = [];
+  nivel_actual = nivel_actual + 1;
+  cambiarNivel(nivel_actual)
 }
 
 function cambiarNivel(nivel) {
@@ -145,6 +142,7 @@ function comprobarVictoria() {
       }
     }
   }
+  
   return true;
 }
 
@@ -342,6 +340,17 @@ window.addEventListener("keydown", function (e) {
     mover(tecla);
   }
 });
+
+function teclasFunciones(evento) {
+    let tecla = e.key;
+    if (tecla === "r") {
+      reiniciarNivel();
+    } else if (tecla === "z") {
+      deshacerMovimiento();
+    } else if (teclasMovimiento.includes(tecla)) {
+      mover(tecla);
+    }
+}
 
 let botonIniciar = document.getElementById("empezar");
 let tableroHTML = document.getElementById("tablero");
