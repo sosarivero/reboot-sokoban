@@ -154,3 +154,7 @@ td {
   background-size: contain;
   background-position: center;
 }
+
+table, #cambiar-estilo {
+  visibility: hidden;
+}

@@ -355,13 +355,16 @@ function teclasFunciones(evento) {
 let botonIniciar = document.getElementById("empezar");
 let tableroHTML = document.getElementById("tablero");
 let inicio = document.getElementById("inicio");
+let botonEstilo = document.getElementById("cambiar-estilo");
+let menuNiveles = document.querySelector("table");
 
 botonIniciar.addEventListener("click", function () {
   imprimirTablero(GLOBAL_TABLERO);
   document.body.removeChild(inicio);
+  botonEstilo.style.visibility = "visible";
+  menuNiveles.style.visibility = "visible";
 });
 
-let botonEstilo = document.getElementById("cambiar-estilo");
 
 // El botón cambiará el estilo del juego, haciendo uso de la variable booleana 'ESTILO_SIMPLIFICADO' y la función imprimirTablero.
 botonEstilo.addEventListener("click", function () {
