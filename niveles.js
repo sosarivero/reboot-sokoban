@@ -68,7 +68,18 @@ const NIVEL7 = `
 #.##.##.#
 #########
 `;
-const NIVELES = [NIVEL1, NIVEL2, NIVEL3, NIVEL4, NIVEL5, NIVEL6, NIVEL7];
+
+const NIVEL8 = `
+##########
+######  ##
+# $  $  ##
+# #  .# ##
+#  . #.@ #
+##$# *   #
+##   #####
+##########
+`
+const NIVELES = [NIVEL1, NIVEL2, NIVEL3, NIVEL4, NIVEL5, NIVEL6, NIVEL7, NIVEL8];
 
 const botonesNiveles = document.querySelectorAll(".nivel");
 

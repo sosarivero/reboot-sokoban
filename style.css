@@ -120,7 +120,7 @@ body {
   width: 152px;
   display: block;
   color: white;
-  border: 12px white inset;
+  border: 1px solid;
   text-align: center;
   background-color: black;
   font-size: 48px;
