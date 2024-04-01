@@ -62,10 +62,6 @@
   color: gray;
 }
 
-.suelo {
-  /* background-image: url("./images/Floor.gif"); */
-}
-
 .meta {
   background-image: url("./images/FLAG_0.webp");
   background-size: contain;
@@ -107,10 +103,10 @@ body {
 }
 
 .celda-texto {
-  min-width: 128px;
-  min-height: 128px;
+  min-width: 86px;
+  min-height: 86px;
   background-image: none;
-  font-size: 96px;
+  font-size: 56px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   text-align: center;
   border: 1px white dotted;
@@ -156,5 +152,5 @@ td {
   background-image: url("./images/STAR_0.webp");
   background-repeat: no-repeat;
   background-size: contain;
-  background-position: center; 
+  background-position: center;
 }
