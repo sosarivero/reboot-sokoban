@@ -11,13 +11,13 @@ botonesNiveles.forEach((boton) => {
 
 function crearTablaNiveles() {
   let contador = 1;
-  let table = document.createElement('table');
+  let table = document.createElement("table");
   for (let i = 0; i < 19; i++) {
-    let tr = document.createElement('tr');
+    let tr = document.createElement("tr");
     for (let j = 0; j < 3; j++) {
-      let td = document.createElement('td');
-      td.textContent = contador.toString().padStart(2, '0');
-      contador++
+      let td = document.createElement("td");
+      td.textContent = contador.toString().padStart(2, "0");
+      contador++;
       tr.appendChild(td);
     }
     table.appendChild(tr);
@@ -26,3 +26,9 @@ function crearTablaNiveles() {
 }
 
 crearTablaNiveles();
+
+let selectoresNivel = document.querySelectorAll("td");
+
+selectoresNivel.forEach((td) => {
+  td.addEventListener("click", () => cambiarNivel(td.textContent - 1));
+});
