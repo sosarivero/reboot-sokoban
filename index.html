@@ -11,27 +11,32 @@
     <script src="coleccionNiveles.js" defer></script>
     <script src="niveles.js" defer></script>
     <script src="main.js" defer></script>
-    <title>Document</title>
+    <title>Sokoban</title>
   </head>
 
   <body>
     <div id="inicio">
       <h1>Sokoban</h1>
-      <h2>SokObAN</h2>
-
-      <p>El desafio para tu mente!</p>
+      <p><img src="./images/KEKE_0.webp" alt=""> Keke eres tú.</p>
       <p>
-        Empuja cajas, resuelve puzzles y conviertete en el maestro del
-        laberinto!
+       <img src="./images/RUBBLE_0.webp" alt=""> Keke vive en una cueva llena de cajas.
       </p>
-      <p>TE esperan horas de diversion!</p>
+      <p><img src="./images/BOX_0.webp" alt=""> Keke no tiene brazos (😿), así que solo puede empujarlas, no tirar de ellas.</p>
+      <p><img src="./images/FLAG_0.webp" alt=""> Keke quiere ordenarlas, y poner cada una sobre una bandera.</p>
+      <p><img src="./images/BOX_0.webp" alt="" style="filter: hue-rotate(160deg)"> Cuando una caja está sobre una bandera se vuelve azul. ¡Magia!
+      <p><img src="./images/STAR_0.webp" alt=""> Ordena todas las cajas de un nivel para completarlo y conseguir una estrella.</p>
+      <br>
+      <p style="margin-left: 2.5rem">⌛ Pulsa la tecla R para reiniciar el nivel actual, y Z para deshacer el último movimiento.</p>
+      <p style="margin-left: 2.5rem">🔎 Usa el zoom del navegador (Ctrl +, Ctrl -) para ajustar el tamaño.</p>
+      <p style="margin-left: 2.5rem">🖌️ Keke (y el resto de sprites) fueron diseñados por  <a href="https://www.hempuli.com/" target="_blank">Arvi Teikari</a> para el juego <a href="https://www.hempuli.com/baba/" target="_blank">Baba Is You</a>.</p>
+      <p style="margin-left: 2.5rem">💘 Haz click en el Keke gigante para comenzar a jugar.</p>
 
-      <h3>Instrucciones</h3>
-
-      <button id="empezar">Pressionar para empezar</button>
+      <img src="./images/KEKE_0.webp" style="height: 300px; width: auto;" alt="" id="empezar">
+      <!-- <button id="empezar">Pressionar para empezar</button> -->
     </div>
-    <div id="botones-gameplay">
-      <button id="cambiar-estilo">TEMA</button>
+
+    <div id="izquierda">
+      <button id="cambiar-estilo">Tema</button>
       <ul class="instrucciones">
         Controles:
         <li>Flechas</li>

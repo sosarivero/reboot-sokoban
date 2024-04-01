@@ -347,11 +347,12 @@ let tableroHTML = document.getElementById("tablero");
 let inicio = document.getElementById("inicio");
 let botonEstilo = document.getElementById("cambiar-estilo");
 let menuNiveles = document.querySelector("table");
+let izquierda = document.querySelector("#izquierda")
 
 botonIniciar.addEventListener("click", function () {
   imprimirTablero(GLOBAL_TABLERO);
   document.body.removeChild(inicio);
-  botonEstilo.style.visibility = "visible";
+  izquierda.style.visibility = "visible";
   menuNiveles.style.visibility = "visible";
 });
 

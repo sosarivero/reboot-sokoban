@@ -1,19 +1,25 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: Daydream;
 }
 
 @font-face {
   font-family: Daydream;
   src: url("./Daydream.ttf");
 }
+#tablero, #izquierda, table, #cambiar-estilo {
+  font-family: Daydream;
+}
+
 
 #inicio {
   background-color: black;
   color: white;
-  text-align: center;
-  font-weight: 100;
+}
+
+#inicio > * {
+  font-family: courier;
+
 }
 
 #tablero {
@@ -71,7 +77,6 @@
 
 #empezar {
   display: block;
-  background-color: rgb(255, 115, 0);
   text-align: center;
   margin: 0 auto;
   height: 100px;
@@ -94,7 +99,7 @@ h3 {
 }
 
 p {
-  font-size: 30px;
+  font-size: 1.7rem;
 }
 
 body {
@@ -147,7 +152,7 @@ td {
   background-position: center;
 }
 
-table, #cambiar-estilo {
+table, #izquierda {
   visibility: hidden;
 }
 
