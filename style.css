@@ -34,7 +34,6 @@
   background-image: url("./images/Player.gif");
 }
 
-
 .caja {
   background-image: url("./images/Box.gif");
   color: green;
@@ -93,18 +92,55 @@ body {
   background-color: black;
 }
 
-#cambiar-estilo {
-  max-width: 250px;
-  max-height: 75px;
-  order: 2;
-}
-
 .celda-texto {
   min-width: 128px;
   min-height: 128px;
-  background-image:none;
+  background-image: none;
   font-size: 96px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   text-align: center;
   border: 1px white dotted;
+}
+
+#botones-gameplay {
+  order: 2;
+}
+
+#cambiar-estilo,
+.titulo-dropdown,
+.nivel {
+  width: 152px;
+  height: 48px;
+  display: block;
+  color: white;
+  border: 12px white inset;
+  text-align: center;
+  background-color: black;
+  font-size: 48px;
+  user-select: none;
+}
+
+#cambiar-estilo {
+  height: 96px;
+  width: 164px;
+}
+
+.nivel {
+  font-size: 36px;
+}
+
+.menu-niveles {
+  order: 3;
+  height: 10px;
+}
+
+.seleccionar-niveles {
+  display: flex;
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+}
+
+.menu-niveles:hover .seleccionar-niveles {
+  display: block;
 }

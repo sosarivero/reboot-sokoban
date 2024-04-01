@@ -74,16 +74,23 @@ function refrescarTablero() {
 
   if (comprobarVictoria(GLOBAL_TABLERO)) {
     // window.alert("Parabens, ganhaste e passas ao proximo nivel!");
-    setTimeout(cambiarNivel, 1500);
+    setTimeout(avanzarNivel, 1500);
   }
   imprimirTablero(GLOBAL_TABLERO);
 }
 
-function cambiarNivel() {
+function avanzarNivel() {
   nivel_actual++;
   GLOBAL_TABLERO = stringDeNivelATablero(NIVELES[nivel_actual]);
   refrescarTablero();
   // Borra el historial de historialTableros, para evitar deshacer a un nivel anterior
+  GLOBAL_HISTORIAL = [];
+}
+
+function cambiarNivel(nivel) {
+  nivel_actual = nivel;
+  GLOBAL_TABLERO = stringDeNivelATablero(NIVELES[nivel]);
+  refrescarTablero();
   GLOBAL_HISTORIAL = [];
 }
 
