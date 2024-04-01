@@ -332,25 +332,15 @@ const teclasMovimiento = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
 
 window.addEventListener("keydown", function (e) {
   let tecla = e.key;
-  if (tecla === "r") {
+  if (tecla.toLowerCase() === "r") {
     reiniciarNivel();
-  } else if (tecla === "z") {
+  } else if (tecla.toLowerCase() === "z") {
     deshacerMovimiento();
   } else if (teclasMovimiento.includes(tecla)) {
     mover(tecla);
   }
 });
 
-function teclasFunciones(evento) {
-  let tecla = e.key;
-  if (tecla === "r") {
-    reiniciarNivel();
-  } else if (tecla === "z") {
-    deshacerMovimiento();
-  } else if (teclasMovimiento.includes(tecla)) {
-    mover(tecla);
-  }
-}
 
 let botonIniciar = document.getElementById("empezar");
 let tableroHTML = document.getElementById("tablero");
