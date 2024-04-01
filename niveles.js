@@ -1,85 +1,4 @@
-const NIVEL1 = `
-#######
-###.###
-###$###
-#.$@$.#
-###$###
-###.###
-#######`;
-
-const NIVEL2 = `
-#######
-#.   .#
-#  $  #
-# $@$ #
-#  $  #
-#.   .#
-#######
-`;
-
-const NIVEL3 = `
-#######
-#.   .#
-#.$$$.#
-##$@$##
-#.$$$.#
-#.   .#
-#######
-`;
-
-const NIVEL4 = `
-#######
-#.   .#
-# $@$ #
-# ### #
-# $ $ #
-#.   .#
-#######
-`;
-
-const NIVEL5 = `
-########
-#.  $ .#
-#.$$$$.#
-#. @$ .#
-########
-`;
-
-const NIVEL6 = `
-#########
-#.......#
-#.$ $ $ #
-#$ $ $ $#
-# $ @ $ #
-#$ $ $ $#
-# $ $ $.#
-#.......#
-#########
-`;
-
-const NIVEL7 = `
-#########
-#.##.##.#
-#   .   #
-#$ $$$  #
-#. $@$ .#
-#  $$$ $#
-#   .   #
-#.##.##.#
-#########
-`;
-
-const NIVEL8 = `
-##########
-######  ##
-# $  $  ##
-# #  .# ##
-#  . #.@ #
-##$# *   #
-##   #####
-##########
-`
-const NIVELES = [NIVEL1, NIVEL2, NIVEL3, NIVEL4, NIVEL5, NIVEL6, NIVEL7, NIVEL8];
+let NIVELES = coleccionNiveles.replaceAll("-", " ").split("=");
 
 const botonesNiveles = document.querySelectorAll(".nivel");
 
@@ -89,3 +8,21 @@ botonesNiveles.forEach((boton) => {
     cambiarNivel(nivel);
   });
 });
+
+function crearTablaNiveles() {
+  let contador = 1;
+  let table = document.createElement('table');
+  for (let i = 0; i < 19; i++) {
+    let tr = document.createElement('tr');
+    for (let j = 0; j < 3; j++) {
+      let td = document.createElement('td');
+      td.textContent = contador.toString().padStart(2, '0');
+      contador++
+      tr.appendChild(td);
+    }
+    table.appendChild(tr);
+  }
+  document.body.appendChild(table);
+}
+
+crearTablaNiveles();
