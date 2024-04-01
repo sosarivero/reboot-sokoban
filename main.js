@@ -75,7 +75,7 @@ function refrescarTablero() {
 
   if (comprobarVictoria(GLOBAL_TABLERO)) {
     // window.alert("Parabens, ganhaste e passas ao proximo nivel!");
-    return setTimeout(avanzarNivel, 200);
+    return setTimeout(avanzarNivel, 350);
   }
 }
 

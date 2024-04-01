@@ -13,6 +13,7 @@
   background-color: black;
   color: white;
   text-align: center;
+  font-weight: 100;
 }
 
 #tablero {
@@ -41,31 +42,31 @@
   background-image: url("./images/KEKE_0.webp");
   background-repeat: no-repeat;
   background-size: cover;
+  color: #e4523a;
 }
 
 .caja {
   background-image: url("./images/BOX_0.webp");
   background-size: contain;
-  color: green;
+  color: #c19d45;
 }
 
 .caja-en-meta {
   background-image: url("./images/BOX_0.webp");
   filter: hue-rotate(160deg);
   background-size: contain;
-  color: yellowgreen;
 }
 
 .pared {
   background-image: url("./images/RUBBLE_0.webp");
   background-size: contain;
-  color: gray;
+  color: #90673e;
 }
 
 .meta {
   background-image: url("./images/FLAG_0.webp");
   background-size: contain;
-  color: yellow;
+  color: #ede285;
 }
 
 #empezar {
@@ -112,25 +113,16 @@ body {
   border: 1px white dotted;
 }
 
-#botones-gameplay {
-  order: 1;
-}
-
 #cambiar-estilo {
-  width: 152px;
+  order: 1;
+  border: none;
   display: block;
   color: white;
-  text-align: center;
   background-color: black;
   font-size: 32px;
   user-select: none;
 }
 
-#cambiar-estilo {
-  height: 96px;
-  width: 164px;
-  border: none;
-}
 
 table {
   user-select: none;
@@ -157,4 +149,11 @@ td {
 
 table, #cambiar-estilo {
   visibility: hidden;
+}
+
+ul {
+  user-select: none;
+  margin-top: 50px;
+  list-style-type: none;
+  color: lightgray;
 }
