@@ -150,3 +150,11 @@ td {
   background-color: black;
   color: white;
 }
+
+.marcado-completo {
+  color: transparent;
+  background-image: url("./images/STAR_0.webp");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center; 
+}

@@ -81,7 +81,7 @@ function refrescarTablero() {
 
 function avanzarNivel() {
   nivel_actual = nivel_actual + 1;
-  cambiarNivel(nivel_actual)
+  cambiarNivel(nivel_actual);
 }
 
 function cambiarNivel(nivel) {
@@ -142,7 +142,7 @@ function comprobarVictoria() {
       }
     }
   }
-  
+  marcarCompletado(nivel_actual);
   return true;
 }
 
@@ -342,14 +342,14 @@ window.addEventListener("keydown", function (e) {
 });
 
 function teclasFunciones(evento) {
-    let tecla = e.key;
-    if (tecla === "r") {
-      reiniciarNivel();
-    } else if (tecla === "z") {
-      deshacerMovimiento();
-    } else if (teclasMovimiento.includes(tecla)) {
-      mover(tecla);
-    }
+  let tecla = e.key;
+  if (tecla === "r") {
+    reiniciarNivel();
+  } else if (tecla === "z") {
+    deshacerMovimiento();
+  } else if (teclasMovimiento.includes(tecla)) {
+    mover(tecla);
+  }
 }
 
 let botonIniciar = document.getElementById("empezar");

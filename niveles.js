@@ -16,7 +16,8 @@ function crearTablaNiveles() {
     let tr = document.createElement("tr");
     for (let j = 0; j < 3; j++) {
       let td = document.createElement("td");
-      td.textContent = contador.toString().padStart(2, "0");
+      td.setAttribute("data-nivel", contador - 1)
+      td.textContent = contador.toString().padStart(2, "0"); // Añade padding para que todos los números tengan caracteres
       contador++;
       tr.appendChild(td);
     }
@@ -32,3 +33,8 @@ let selectoresNivel = document.querySelectorAll("td");
 selectoresNivel.forEach((td) => {
   td.addEventListener("click", () => cambiarNivel(td.textContent - 1));
 });
+
+function marcarCompletado(nivel) {
+  let selectorNivel = document.querySelector(`[data-nivel="${nivel}"]`);
+  selectorNivel.classList.add("marcado-completo");
+}
