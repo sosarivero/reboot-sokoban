@@ -12,7 +12,7 @@ botonesNiveles.forEach((boton) => {
 function crearTablaNiveles() {
   let contador = 1;
   let table = document.createElement("table");
-  for (let i = 0; i < 19; i++) {
+  for (let i = 0; i < 20; i++) {
     let tr = document.createElement("tr");
     for (let j = 0; j < 3; j++) {
       let td = document.createElement("td");
